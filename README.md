@@ -45,7 +45,7 @@ El ESP32 actúa como un **nodo de control de bajo nivel**, enfocado exclusivamen
 
 ### 2.2 `clientWeb.py` (Cliente Web / Inferencia)
 
-**Dispositivo:** Raspberry Pi 5 (Para contar con GPU laptop o Jetson)
+**Dispositivo:** Raspberry Pi 5  
 **Lenguaje:** Python
 
 Este código implementa el **cliente de inferencia del modelo de visión artificial** basado en una **Red Neuronal Convolucional (CNN)**.
@@ -117,6 +117,11 @@ Este archivo binario contiene los **pesos y parámetros entrenados** de la red n
   1. **`BUENO`**: Blister completo con todas las pastillas.
   2. **`MALO`**: Blister con faltantes, roturas o defectos.
   3. **`NADA`**: Fondo vacío o ruido.
+
+#### Entrenamiento y Código Fuente:
+El código utilizado para el preprocesamiento del dataset, entrenamiento de la red y exportación del modelo `.pth` se encuentra disponible en el siguiente notebook de Google Colab:
+
+> 🔗 **[Ver Código de Entrenamiento en Google Colab](https://colab.research.google.com/drive/1RS7RVlg0_MqOzIrkuBl7jehC0Q-Pum7k)**
 
 #### Ciclo de Vida:
 1. **Carga:** Se inicializa una sola vez al arrancar el sistema para optimizar memoria RAM.

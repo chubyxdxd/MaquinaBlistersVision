@@ -48,7 +48,7 @@ El ESP32 actúa como un **nodo de control de bajo nivel**, enfocado exclusivamen
 
 ### 2.2 `clientWeb.py` (Cliente Web / Inferencia)
 
-**Dispositivo:** Raspberry Pi 5  
+**Dispositivo:** Raspberry Pi 5 (Si se quiere contar con GPU utilizar una laptop o Jetson)
 **Lenguaje:** Python
 
 Este código implementa el **cliente de inferencia del modelo de visión artificial** basado en una **Red Neuronal Convolucional (CNN)**. 

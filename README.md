@@ -9,11 +9,12 @@ El sistema implementa una arquitectura distribuida basada en un **microcontrolad
 
 ## 1. Arquitectura General del Software
 
-El software del proyecto se divide en tres componentes principales:
+El software del proyecto se divide en cuatro componentes principales:
 
 - **ESP32 (Control de bajo nivel y actuación)**
 - **Raspberry Pi 5 (Procesamiento, visión artificial y supervisión)**
 - **Sistema de comunicación UART entre ambos dispositivos**
+- **Modelo de IA (Red Neuronal) para la clasificación**
 
 Esta separación permite aislar las tareas críticas de control del procesamiento intensivo de imágenes, mejorando la estabilidad y escalabilidad del sistema.
 
@@ -102,6 +103,28 @@ Este enfoque multi-threading permite que el sistema opere de manera **concurrent
 
 ---
 
+### 2.4 `model_cnn.pth` (Modelo de Red Neuronal)
+
+**Formato:** PyTorch State Dictionary (`.pth`)  
+**Arquitectura:** Red Neuronal Convolucional (CNN)  
+
+Este archivo binario contiene los **pesos y parámetros entrenados** de la red neuronal. Es el "cerebro" del sistema de visión y es cargado dinámicamente por el script `clientWeb.py` al iniciar el sistema.
+
+#### Características Técnicas del Modelo:
+- **Entrada (Input):** Imágenes RGB redimensionadas (224x224 px) y normalizadas.
+- **Salida (Output):** Vector de probabilidad para las clases definidas.
+- **Clases de Entrenamiento:**
+  1. **`BUENO`**: Blister completo con todas las pastillas.
+  2. **`MALO`**: Blister con faltantes, roturas o defectos.
+  3. **`NADA`**: Fondo vacío o ruido.
+
+#### Ciclo de Vida:
+1. **Carga:** Se inicializa una sola vez al arrancar el sistema para optimizar memoria RAM.
+2. **Uso:** Recibe tensores de imagen desde `clientWeb.py` y retorna la predicción.
+3. **Mantenimiento:** Este archivo puede ser reemplazado por versiones re-entrenadas sin necesidad de modificar el código fuente principal.
+
+---
+
 ## 3. Flujo General de Funcionamiento
 
 1. La cinta transportadora desplaza los blisters hacia la zona de inspección.
@@ -135,7 +158,3 @@ El software desarrollado permite validar el funcionamiento del prototipo bajo co
 - Clasificación mediante visión artificial.
 - Control del transporte basado en decisiones inteligentes.
 - Registro estadístico de los resultados de inspección.
-
----
-
-

@@ -3,7 +3,7 @@
 
 Este repositorio contiene el código fuente desarrollado para el prototipo **Máquina de Control de Calidad Estadístico de Blisters de Pastillas con Visión Artificial**, correspondiente a la materia **IMT-313 – Diseño Superior de Ingeniería** (UCB).
 
-El sistema implementa una arquitectura distribuida basada en un **microcontrolador ESP32** y una **Raspberry Pi 5**, comunicados mediante **UART**, donde cada dispositivo cumple un rol específico dentro del proceso de inspección automática y control estadístico.
+El sistema implementa una arquitectura distribuida basada en un **microcontrolador ESP32** y una **Raspberry Pi 5**, comunicados mediante **UART**,  donde cada dispositivo cumple un rol específico dentro del proceso de inspección automática y control estadístico.
 
 ---
 
@@ -16,7 +16,7 @@ El software del proyecto se divide en cuatro componentes principales:
 - **Sistema de comunicación UART entre ambos dispositivos**
 - **Modelo de IA (Red Neuronal) para la clasificación**
 
-Esta separación permite aislar las tareas críticas de control del procesamiento intensivo de imágenes, mejorando la estabilidad y escalabilidad del sistema.
+Esta separación permite aislar las tareas críticas de control del procesamiento intensivo de imágenes, mejorando la estabilidad y escalabilidad del sistema. 
 
 ---
 
@@ -31,7 +31,10 @@ Este archivo corresponde al código que se **carga directamente en el microcontr
 Su función principal es el **control del sistema de transporte** y la comunicación con la Raspberry Pi.
 
 #### Funcionalidades principales:
-- Definición y configuración de los **pines de entrada y salida** del ESP32.
+- Definición y configuración de los **pines de entrada y salida** del ESP32. 
+
+[Image of ESP32 pinout diagram]
+
 - Control del **driver de motor 4899**, encargado de accionar la cinta transportadora.
 - Inicialización y manejo de la **comunicación UART** con la Raspberry Pi.
 - Recepción de comandos desde la Raspberry Pi para:
@@ -48,7 +51,10 @@ El ESP32 actúa como un **nodo de control de bajo nivel**, enfocado exclusivamen
 **Dispositivo:** Raspberry Pi 5  
 **Lenguaje:** Python
 
-Este código implementa el **cliente de inferencia del modelo de visión artificial** basado en una **Red Neuronal Convolucional (CNN)**.
+Este código implementa el **cliente de inferencia del modelo de visión artificial** basado en una **Red Neuronal Convolucional (CNN)**. 
+
+[Image of Convolutional Neural Network architecture diagram]
+
 
 #### Funcionalidades principales:
 - Recepción de imágenes preprocesadas del sistema de visión.
@@ -70,7 +76,7 @@ Este módulo se centra exclusivamente en la **evaluación del estado del blister
 **Paradigma:** Multi-threading
 
 Este archivo corresponde al **núcleo del sistema de control en la Raspberry Pi**.  
-Implementa una arquitectura **multi-hilo** para ejecutar múltiples procesos en paralelo.
+Implementa una arquitectura **multi-hilo** para ejecutar múltiples procesos en paralelo. 
 
 #### Hilos principales del sistema:
 
@@ -118,10 +124,10 @@ Este archivo binario contiene los **pesos y parámetros entrenados** de la red n
   2. **`MALO`**: Blister con faltantes, roturas o defectos.
   3. **`NADA`**: Fondo vacío o ruido.
 
-#### Entrenamiento y Código Fuente:
-El código utilizado para el preprocesamiento del dataset, entrenamiento de la red y exportación del modelo `.pth` se encuentra disponible en el siguiente notebook de Google Colab:
+#### Recursos de Entrenamiento:
+Para reproducir el entrenamiento, re-entrenar la red o auditar los datos utilizados, se proporcionan los siguientes enlaces al código fuente y al dataset de imágenes:
 
-> 🔗 **[Ver Código de Entrenamiento en Google Colab](https://colab.research.google.com/drive/1RS7RVlg0_MqOzIrkuBl7jehC0Q-Pum7k)**
+> 🔗 **[Ver Código de Entrenamiento en Google Colab](https://colab.research.google.com/drive/1RS7RVlg0_MqOzIrkuBl7jehC0Q-Pum7k)** > 📂 **[Acceder al Dataset de Imágenes en Google Drive](https://drive.google.com/drive/folders/1TJzuEOMxI42iUzIrMuAyHF2DZ2CWeCAV?usp=drive_link)**
 
 #### Ciclo de Vida:
 1. **Carga:** Se inicializa una sola vez al arrancar el sistema para optimizar memoria RAM.
